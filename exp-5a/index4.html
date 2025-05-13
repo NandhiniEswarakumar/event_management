@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management Server</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom styles for the simulated server and event display */
+        #server-info {
+            background-color: #e9ecef;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            font-size: 14px;
+            color: #212529;
+        }
+        #event-content {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+        }
+        #event-form {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+        .event-card {
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .event-card-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-bottom: 1px solid #007bff;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        .event-card-body {
+            padding: 15px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Event Management Server</h1>
+
+        <div id="server-info">
+            <p>Server Status: Running (Simulated)</p>
+            <p>Listening on Port: 8080 (Simulated)</p>
+        </div>
+
+        <div id="event-content">
+            <h2>Welcome to the Event Management System</h2>
+            <p>This is a simulated server displaying event data.  You can add new events using the form below.</p>
+            <div id="event-list">
+                <h3>Upcoming Events</h3>
+                <p>No events currently added.</p>
+            </div>
+        </div>
+
+        <div id="event-form">
+            <h2>Add New Event</h2>
+            <form id="add-event-form">
+                <div class="form-group">
+                    <label for="event-name">Event Name:</label>
+                    <input type="text" class="form-control" id="event-name" name="event-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-date">Date:</label>
+                    <input type="date" class="form-control" id="event-date" name="event-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-description">Description:</label>
+                    <textarea class="form-control" id="event-description" name="event-description" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Event</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Simulated server data (in a real application, this would come from a server)
+        let events = [];
+
+        // Function to display events
+        function displayEvents() {
+            const eventList = document.getElementById('event-list');
+            eventList.innerHTML = '<h3>Upcoming Events</h3>'; // Clear old content
+
+            if (events.length === 0) {
+                eventList.innerHTML += '<p>No events currently added.</p>';
+                return;
+            }
+
+            events.forEach(event => {
+                const eventCard = document.createElement('div');
+                eventCard.className = 'card event-card';
+                eventCard.innerHTML = `
+                    <div class="card-header event-card-header">${event.name}</div>
+                    <div class="card-body event-card-body">
+                        <p><strong>Date:</strong> ${event.date}</p>
+                        <p>${event.description}</p>
+                    </div>
+                `;
+                eventList.appendChild(eventCard);
+            });
+        }
+
+        // Function to handle form submission (simulated server-side logic)
+        function handleAddEvent(event) {
+            event.preventDefault(); // Prevent the form from submitting in the traditional way
+
+            const eventName = document.getElementById('event-name').value;
+            const eventDate = document.getElementById('event-date').value;
+            const eventDescription = document.getElementById('event-description').value;
+
+            // Basic validation (you'd want more robust validation in a real app)
+            if (!eventName || !eventDate || !eventDescription) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            // Simulate adding the event to the server (in reality, you'd send a request)
+            const newEvent = {
+                name: eventName,
+                date: eventDate,
+                description: eventDescription
+            };
+            events.push(newEvent); // Add to our simulated data store
+            displayEvents(); // Update the display
+
+            // Clear the form
+            document.getElementById('add-event-form').reset();
+            alert('Event added successfully!'); // Provide feedback to the user
+        }
+
+        // Add event listener to the form
+        document.getElementById('add-event-form').addEventListener('submit', handleAddEvent);
+
+        // Initial display of events (if any)
+        displayEvents();
+    </script>
+</body>
+</html>
