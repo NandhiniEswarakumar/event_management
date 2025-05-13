@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Events Demo</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS for the demo */
+        #event-area {
+            width: 100%;
+            height: 200px;
+            border: 2px solid #ddd;
+            margin-bottom: 20px;
+            padding: 10px;
+            overflow-y: scroll;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .event-box {
+            width: 100px;
+            height: 100px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            line-height: 100px;
+            margin: 20px auto;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .event-box:hover {
+            background-color: #0056b3;
+        }
+        .event-box:active {
+            background-color: #004080;
+        }
+        #clear-button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Mouse Events Demo</h1>
+        <div id="event-area">
+            <p>Event Log:</p>
+        </div>
+        <div class="event-box" id="my-event-box">
+            Click Me
+        </div>
+        <button id="clear-button" class="btn btn-danger">Clear Log</button>
+    </div>
+
+    <script>
+        // Get references to the elements
+        const eventArea = document.getElementById('event-area');
+        const eventBox = document.getElementById('my-event-box');
+        const clearButton = document.getElementById('clear-button');
+
+        // Function to append events to the event area
+        function logEvent(eventName, event) {
+            const paragraph = document.createElement('p');
+            let message = `${eventName}: `;
+             if (event) {
+                message += `(Target: ${event.target.tagName}, Type: ${event.type})`;
+             }
+            paragraph.textContent = message;
+            eventArea.appendChild(paragraph);
+            eventArea.scrollTop = eventArea.scrollHeight; // Auto-scroll to bottom
+        }
+
+        // Add event listeners to the event box
+        eventBox.addEventListener('click', (event) => logEvent('Click', event));
+        eventBox.addEventListener('dblclick', (event) => logEvent('Double Click', event));
+        eventBox.addEventListener('mousedown', (event) => logEvent('Mouse Down', event));
+        eventBox.addEventListener('mouseup', (event) => logEvent('Mouse Up', event));
+        eventBox.addEventListener('mouseenter', (event) => logEvent('Mouse Enter', event));
+        eventBox.addEventListener('mouseleave', (event) => logEvent('Mouse Leave', event));
+        eventBox.addEventListener('mousemove', (event) => logEvent('Mouse Move', event));
+        // Add event listener for right click
+        eventBox.addEventListener('contextmenu', (event) => {
+            logEvent('Right Click', event);
+            event.preventDefault(); // Prevent default context menu
+        });
+
+        // Add event listener to the clear button
+        clearButton.addEventListener('click', () => {
+            eventArea.innerHTML = '<p>Event Log:</p>'; // Clear the log, keep initial text
+        });
+    </script>
+</body>
+</html>
