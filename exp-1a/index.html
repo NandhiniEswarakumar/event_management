@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Organizer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    header {
+      background-color: #4a90e2;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #2c3e50;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+
+    article {
+      flex: 3;
+      padding: 20px;
+      background-color: white;
+      margin-right: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    aside {
+      flex: 1;
+      padding: 20px;
+      background-color: #e9ecef;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    footer {
+      background-color: #4a90e2;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    section {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Event Organizer</h1>
+    <p>Plan | Organize | Execute</p>
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Events</a>
+    <a href="#">Create Event</a>
+    <a href="#">Contact</a>
+  </nav>
+
+  <main>
+    <article>
+      <h2>Upcoming Events</h2>
+      <section>
+        <h3>Tech Symposium 2025</h3>
+        <p>Date: June 20, 2025<br>
+           Venue: Kongu Engineering College Auditorium<br>
+           Description: A national-level technical symposium featuring coding, design, and innovation challenges.</p>
+      </section>
+      <section>
+        <h3>Workshop on AI & ML</h3>
+        <p>Date: July 10, 2025<br>
+           Venue: Main Seminar Hall<br>
+           Description: Hands-on workshop exploring AI trends, practical ML applications, and career insights.</p>
+      </section>
+    </article>
+
+    <aside>
+      <h2>Quick Links</h2>
+      <ul>
+        <li><a href="#">Create New Event</a></li>
+        <li><a href="#">My Registrations</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Event Organizer. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
