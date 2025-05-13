@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">Event Booking</a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/events" routerLinkActive="active">Events</a>
+          </li>
+        </ul>
+        
+        <div class="d-flex">
+          <button class="btn btn-outline-light position-relative me-2" routerLink="/cart">
+            <i class="bi bi-cart"></i> Cart
+            <span *ngIf="cartItemCount > 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ cartItemCount }}
+            </span>
+          </button>
+          <button class="btn btn-outline-light" routerLink="/user-form">
+            <i class="bi bi-person"></i> User Form
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>

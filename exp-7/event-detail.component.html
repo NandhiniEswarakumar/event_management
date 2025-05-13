@@ -1,0 +1,52 @@
+<div class="container mt-4" *ngIf="event">
+    <div class="row">
+      <div class="col-md-5">
+        <img [src]="event.imageUrl" class="img-fluid rounded" alt="{{ event.name }}">
+      </div>
+      
+      <div class="col-md-7">
+        <h1>{{ event.name }}</h1>
+        
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <span class="badge bg-info fs-6">{{ event.category }}</span>
+          <span class="text-muted">{{ event.date | date:'fullDate' }}</span>
+        </div>
+        
+        <p class="lead">{{ event.description }}</p>
+        
+        <div class="mb-3">
+          <strong>Location:</strong> {{ event.location }}
+        </div>
+        
+        <div class="mb-3">
+          <strong>Available Tickets:</strong> {{ event.availableTickets }}
+        </div>
+        
+        <div class="mb-4">
+          <h3>{{ event.price | currency }}</h3>
+        </div>
+        
+        <div class="d-flex align-items-center mb-4">
+          <div class="input-group" style="max-width: 150px;">
+            <button class="btn btn-outline-secondary" type="button" (click)="decrementQuantity()">-</button>
+            <input type="number" class="form-control text-center" [(ngModel)]="quantity" min="1" [max]="event.availableTickets">
+            <button class="btn btn-outline-secondary" type="button" (click)="incrementQuantity()">+</button>
+          </div>
+          
+          <div class="ms-3">
+            <button class="btn btn-primary" (click)="addToCart()">Add to Cart</button>
+          </div>
+        </div>
+        
+        <a routerLink="/events" class="btn btn-outline-secondary">
+          Back to Events
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container mt-4" *ngIf="!event">
+    <div class="alert alert-warning">
+      Event not found. <a routerLink="/events">Go back to events list</a>
+    </div>
+  </div>

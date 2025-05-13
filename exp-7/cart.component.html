@@ -1,0 +1,64 @@
+<div class="container">
+    <h2 class="mb-4">Shopping Cart</h2>
+    
+    <div *ngIf="cartItems.length === 0" class="alert alert-info">
+        Your cart is empty. <a routerLink="/events">Continue shopping</a>
+    </div>
+  
+    <div *ngIf="cartItems.length > 0">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of cartItems">
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <img [src]="item.imageUrl"
+                                 class="img-thumbnail me-3"
+                                 style="width: 100px;"
+                                 alt="{{ item.name }}">
+                                 <div>
+                                    <h6 class="mb-0">{{ item.name }}</h6>
+                                    <small class="text-muted">{{ item.date | date }}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>${{ item.price }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>${{ item.price * item.quantity }}</td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" (click)="removeFromCart(item.id)">
+                                Remove
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                        <td><strong>${{ total }}</strong></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+      
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-secondary" routerLink="/events">
+                    Continue Shopping
+                </button>
+                <button class="btn btn-danger" (click)="clearCart()">
+                    Clear Cart
+                </button>
+            </div>
+        </div>
+      </div>
+      
+      
+  

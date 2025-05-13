@@ -1,0 +1,93 @@
+<div class="container mt-4">
+    <h1>Checkout</h1>
+    
+    <div *ngIf="!checkoutComplete">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="mb-0">Customer Information</h5>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Full Name</label>
+                  <input type="text" class="form-control" id="name" [(ngModel)]="customerName" name="customerName" required>
+                </div>
+                
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email Address</label>
+                  <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
+                </div>
+                
+                <div class="mb-3">
+                  <label for="address" class="form-label">Address</label>
+                  <textarea class="form-control" id="address" rows="3" [(ngModel)]="address" name="address" required></textarea>
+                </div>
+              </form>
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">Payment Information</h5>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="mb-3">
+                  <label for="cardNumber" class="form-label">Card Number</label>
+                  <input type="text" class="form-control" id="cardNumber" [(ngModel)]="cardNumber" name="cardNumber" required>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label for="expiryDate" class="form-label">Expiry Date</label>
+                    <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" [(ngModel)]="expiryDate" name="expiryDate" required>
+                  </div>
+                  
+                  <div class="col-md-6 mb-3">
+                    <label for="cvv" class="form-label">CVV</label>
+                    <input type="text" class="form-control" id="cvv" [(ngModel)]="cvv" name="cvv" required>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">Order Summary</h5>
+            </div>
+            <div class="card-body">
+              <div class="d-flex justify-content-between mb-2">
+                <span>Subtotal:</span>
+                <span>{{ cartTotal / 1.1 | currency }}</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span>Tax (10%):</span>
+                <span>{{ (cartTotal / 1.1) * 0.1 | currency }}</span>
+              </div>
+              <hr>
+              <div class="d-flex justify-content-between mb-3">
+                <strong>Total:</strong>
+                <strong>{{ cartTotal | currency }}</strong>
+              </div>
+              <button class="btn btn-success w-100 mt-3" [disabled]="!customerName || !email || !address || !cardNumber || !expiryDate || !cvv" (click)="submitOrder()">
+                Complete Purchase
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div *ngIf="checkoutComplete" class="text-center py-5">
+      <div class="alert alert-success">
+        <h2><i class="bi bi-check-circle"></i> Order Successful!</h2>
+        <p class="lead">Thank you for your purchase. A confirmation email has been sent to your email address.</p>
+      </div>
+      <a routerLink="/events" class="btn btn-primary mt-3">Browse More Events</a>
+    </div>
+  </div>
